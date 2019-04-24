@@ -4,6 +4,7 @@
 ## Variables
 vm_name=$1
 resource_group=$2
+size=$3
 
 ## Validate Variables
 if [ -z "$vm_name" ]; then
@@ -13,6 +14,11 @@ fi
 
 if [ -z "$resource_group" ]; then
   echo "You must provide a resource group." 1>&2
+  exit 1
+fi
+
+if [ -z "$size" ]; then
+  echo "You must provide a size." 1>&2
   exit 1
 fi
 
@@ -30,4 +36,18 @@ if [ -z "$(az vm list -g $resource_group --query [].name | grep "\"$vm_name\"")"
   exit 1
 fi
 
-## Script to delete a vm
+## Validate
+echo "Validating new VM size."
+if [ -z "$(az vm list-vm-resize-options -g $resource_group -n $vm_name --query [].name | grep "\"$size\"")" ]; then
+  echo "Invalid size." 1>&2
+  exit 1
+fi
+
+echo "Resizing VM"
+az vm resize -g $resource_group -n $vm_name --size $size
+
+if [ "$?" != "0" ]; then
+  exit 1
+fi
+
+echo "Resize complete"
