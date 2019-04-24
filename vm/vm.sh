@@ -146,6 +146,9 @@ case "$command" in
     ## Validate required arguments
     validate_arg "$size" "size"
     resize $vm_name $resource_group $size
+    ;;
   *)
-    echo "Invalid command."
+    echo "Invalid command." 1>&2
+    exit 1
+    ;;
 esac
