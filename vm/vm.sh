@@ -119,6 +119,12 @@ command=$1
 vm_name=$2
 resource_group=$3
 
+## Check for azure-cli
+if [ -z "$(which az)" ]; then
+  echo "No azure-cli. Please install before continuing." 1>&2
+  exit 1
+fi
+
 ## Validate required arguments
 validate_arg "$command" "command"
 validate_arg "$vm_name" "vm_name"
