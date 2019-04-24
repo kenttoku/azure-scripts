@@ -11,27 +11,33 @@ admin_username=$6
 
 ## Validate Variables
 if [ -z "$vm_name" ]; then
-  echo "You must provide a name for your VM."
+  echo "You must provide a name for your VM." 1>&2
+  exit 1
 fi
 
 if [ -z "$resource_group" ]; then
-  echo "You must provide a resource group."
+  echo "You must provide a resource group." 1>&2
+  exit 1
 fi
 
 if [ -z "$location" ]; then
-  echo "You must provide a location."
+  echo "You must provide a location." 1>&2
+  exit 1
 fi
 
 if [ -z "$image" ]; then
-  echo "You must provide an image."
+  echo "You must provide an image." 1>&2
+  exit 1
 fi
 
 if [ -z "$size" ]; then
-  echo "You must provide a size."
+  echo "You must provide a size." 1>&2
+  exit 1
 fi
 
 if [ -z "$admin_username" ]; then
-  echo "You must provide an admin username."
+  echo "You must provide an admin username." 1>&2
+  exit 1
 fi
 
 ## Check for resource group. If resource group doesn't exist, create it
@@ -58,5 +64,5 @@ az vm create \
   -g $resource_group \
   --image $image \
   --size $size \
-  --admin-username $admin_username
+  --admin-username $admin_username \
   --generate-ssh-keys
