@@ -1,10 +1,21 @@
 #!/bin/bash
 
-## script to delete a vm
+## Script to delete a vm
 
 ## Variables
 vm_name=$1
 resource_group=$2
+
+## Validate Variables
+if [ -z "$vm_name" ]; then
+  echo "You must provide a name for your VM." 1>&2
+  exit 1
+fi
+
+if [ -z "$resource_group" ]; then
+  echo "You must provide a resource group." 1>&2
+  exit 1
+fi
 
 ## Check for resource group.
 echo "Validating resource group."
@@ -19,3 +30,8 @@ if [ -z "$(az vm list -g $resource_group --query [].name | grep "\"$vm_name\"")"
   echo "A VM with the name $vm_name does not exist." 1>&2
   exit 1
 fi
+
+## Delete VM
+echo "Deleting VM."
+az vm delete -g $resource_group -n $vm_name -y
+echo "VM Deleted."
