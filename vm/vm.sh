@@ -148,7 +148,7 @@ case "$command" in
     delete $vm_name $resource_group
     ;;
   "resize")
-    size=$3
+    size=$4
     ## Validate required arguments
     validate_arg "$size" "size"
     resize $vm_name $resource_group $size
