@@ -27,3 +27,12 @@ fi
 validate_arg "$command" "command"
 validate_arg "$disk_name" "vm_name"
 validate_arg "$resource_group" "resource_group"
+
+case "$command" in
+  "create") echo "create";;
+  "delete") echo "delete";;
+  *)
+    echo "Invalid command." 1>&2
+    exit 1
+    ;;
+esac
