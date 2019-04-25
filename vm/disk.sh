@@ -2,7 +2,7 @@
 
 ## Functions
 ## Validate Arguments
-function validate_arg () {
+validate_arg () {
   arg=$1
   arg_name=$2
 
@@ -10,6 +10,16 @@ function validate_arg () {
     echo "Missing argument '$arg_name'." 1>&2
     exit 1
   fi
+}
+
+## Create Disk
+create () {
+  echo "create"
+}
+
+## Delete Disk
+delete () {
+  echo "delete"
 }
 
 ## Main
@@ -29,8 +39,8 @@ validate_arg "$disk_name" "vm_name"
 validate_arg "$resource_group" "resource_group"
 
 case "$command" in
-  "create") echo "create";;
-  "delete") echo "delete";;
+  "create") create;;
+  "delete") delete;;
   *)
     echo "Invalid command." 1>&2
     exit 1
