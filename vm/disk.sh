@@ -29,7 +29,7 @@ main () {
   resource_group=$3
 
   ## Check for azure-cli
-  if [ -z "$(which az)" ]; then
+  if [ -z "$(az -v)" ]; then
     echo "No azure-cli. Please install before continuing." 1>&2
     exit 1
   fi
