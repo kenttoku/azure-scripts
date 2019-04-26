@@ -1,10 +1,29 @@
 #cloud-config
 package_upgrade: true
 packages:
-  - build-essential
-  - curl
-  - file
-  - git
+    - build-essential
+    - curl
+    - file
+    - git
+    - nodejs
+write_files:
+    - owner: 'kent:kent'
+      path: '/home/kent/server.js'
+      content: |
+        const http = require('http');
+
+        const hostname = '0.0.0.0';
+        const port = 8000;
+
+        const server = http.createServer((req, res) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/html');
+            res.end('<h1>Hello Cloud Admin</h1>');
+        });
+
+        server.listen(port, hostname, () => {
+            console.log(`Server running at http://${hostname}:${port}/`);
+        });
 runcmd:
-  - cd ~
-  - curl "https://raw.githubusercontent.com/kenttoku/azure-scripts/master/vm/server.sh" | bash -s "repository" "KentTokunaga@gmail.com" "Kent Tokunaga"
+    - cd '/home/kent/'
+    - node server.js
