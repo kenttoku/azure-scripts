@@ -6,4 +6,5 @@ packages:
   - file
   - git
 runcmd:
-  - curl "https://github.com/kenttoku/azure-scripts/blob/master/vm/server.sh" | bash -s "repository" "KentTokunaga@gmail.com" "Kent Tokunaga"
+  - cd ~
+  - curl "https://raw.githubusercontent.com/kenttoku/azure-scripts/master/vm/server.sh" | bash -s "repository" "KentTokunaga@gmail.com" "Kent Tokunaga"

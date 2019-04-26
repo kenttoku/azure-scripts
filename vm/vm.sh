@@ -47,7 +47,7 @@ create () {
     --size "$size" \
     --admin-username "$admin_username" \
     --generate-ssh-keys \
-    --custom-data cloud-init.txt
+    --custom-data ./cloud-init.txt
 }
 
 ## Delete VM
