@@ -14,3 +14,5 @@ case "$command" in
     exit 1
     ;;
 esac
+
+# az vm extension set -g thursday-rg --vm-name mavericks --publisher Microsoft.Azure.extensions --settings '{"fileUrl":"https://raw.githubusercontent.com/kenttoku/revature-p0/master/linux-setup.sh"}' --protected-settings '{"execute": "~/linux-setup.sh"}' --name customScript

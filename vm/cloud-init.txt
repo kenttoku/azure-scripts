@@ -1,0 +1,9 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - build-essential
+  - curl
+  - file
+  - git
+runcmd:
+  - curl "https://github.com/kenttoku/azure-scripts/blob/master/vm/server.sh" | bash -s "repository" "KentTokunaga@gmail.com" "Kent Tokunaga"
