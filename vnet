@@ -1,0 +1,31 @@
+#!/bin/bash
+
+vm_name=$1
+subnet_name=$2
+resource_group=$3
+vnet_name=$4
+address_prefixes=$5
+admin_username=$6
+
+az network vnet create \
+  -n $vnet_name \
+  -g $resource_group \
+  --address-prefixes $address_prefixes \
+  --subnet-name $subnet_name \
+  --subnet-prefixes $subnet_prefixes
+
+az network vnet subnet create \
+  -n $subnet_name \
+  -g $resource_group \
+  --vnet-name $vnet_name \
+  --address-prefixes $address_prefixes
+
+az vm create \
+  -g $resource_group \
+  -n $vm_name \
+  --image UbuntuLTS \
+  --size Standard_B1s \
+  --generate-ssh-keys \
+  --admin-username $admin_username \
+  --vnet-name $vnet_name \
+  --subnet $subnet_name
