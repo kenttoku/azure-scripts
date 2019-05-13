@@ -2,7 +2,8 @@
 
 # Deletes the resource group.
 # No confirmation
-# No Wait
 resource_group_name=$1
 
-az group delete --no-wait -yg "$resource_group_name"
+echo "Deleting resource group."
+az group delete -yg "$resource_group_name"
+echo "Resource group deleted."
